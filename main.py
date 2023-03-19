@@ -6,12 +6,12 @@ def parallel_processing(n, m, data):
     # create the output pairs
     thread=[]
     for i in range(n):
-        thread.append([i, 0])
+        thread.append((i, 0))
 
     for j in range(m):
-        nxt=min(thread)
-        thread[nxt[1]]=(nxt[0]+data[j], nxt[1])
-        output.append((nxt[1], nxt[0]))
+        nxt, time=min(thread, key=lambda x:x[1])
+        thread[nxt]=(nxt, time+data[j])
+        output.append((nxt, time))
     return output
 
 def main():
@@ -33,8 +33,7 @@ def main():
     
     # TODO: print out the results, each pair in it's own line
     for i, j in result:
-        print(f"{i} {j}")
-
+        print(i, j)
 
 if __name__ == "__main__":
     main()
